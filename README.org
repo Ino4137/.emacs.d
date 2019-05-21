@@ -1,0 +1,79 @@
+* Packages and Themes
+** use-package
+#+BEGIN_SRC emacs-lisp
+  ;;; Until I embrace the declarative nix autism
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+#+END_SRC
+** spacemacs-theme
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'spacemacs-theme)
+    (package-refresh-contents)
+    (package-install 'spacemacs-theme))
+#+END_SRC
+** which-key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
+#+END_SRC
+* Org
+** Org Bullets
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+#+END_SRC
+* Terminal
+** Set fish as terminal
+#+BEGIN_SRC emacs-lisp
+  (defadvice ansi-term (before force-bash)
+    (interactive (list "/bin/fish")))
+  (ad-activate 'ansi-term)
+#+END_SRC
+** Set keybinding for ansi-term
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<s-return>") 'ansi-term)
+#+END_SRC
+* QOL Config
+** No autosave, no backup file
+#+BEGIN_SRC emacs-lisp
+  (setq make-backup-file nil)
+  (setq auto-save-default nil)
+#+END_SRC
+** Remove ugly UI elements
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+#+END_SRC
+** y-or-n instead of yes-or-no
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+** Highlight current line
+#+BEGIN_SRC emacs-lisp
+  ;;; On some terminals it looks atrocious, only use with the GUI
+  (when window-system (global-hl-line-mode t)) 
+#+END_SRC
+** Prettify symbols
+#+BEGIN_SRC emacs-lisp
+  ;;; Don't trust any terminal to display unicode properly
+  ;;; Will probably have to disable it in agda-mode
+  (when window-system (global-prettify-symbols-mode t))
+#+END_SRC
+** Disable startup popup
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t)
+#+END_SRC
+** Scroll with the cursor
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively 100)
+#+END_SRC
+** Disable the jumpscare bell
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+END_SRC
