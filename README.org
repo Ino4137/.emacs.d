@@ -12,6 +12,26 @@
     (package-refresh-contents)
     (package-install 'spacemacs-theme))
 #+END_SRC
+** spaceline
+#+BEGIN_SRC emacs-lisp
+  (use-package spaceline
+    :ensure t
+    :config
+    (require 'spaceline-config)
+    (setq powerline-default-separator (quote arrow))
+    (spaceline-spacemacs-theme))
+#+END_SRC
+** diminish
+#+BEGIN_SRC emacs-lisp
+  (use-package diminish
+    :ensure t
+    :init
+    (diminish 'which-key-mode)
+    (diminish 'subword-mode)
+    (diminish 'rainbow-mode)
+    (diminish 'auto-revert-mode)
+    (diminish 'company-mode))
+#+END_SRC
 ** which-key
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
@@ -73,6 +93,35 @@
   (use-package magit
     :ensure t)
   (global-set-key (kbd "C-x g") 'magit-status)
+#+END_SRC
+** company
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :init
+    (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
+** dmenu
+#+BEGIN_SRC emacs-lisp
+  (use-package dmenu
+    :ensure t
+    :bind
+    ("s-SPC" . 'dmenu))
+#+END_SRC
+** symon
+#+BEGIN_SRC emacs-lisp
+  (use-package symon
+    :ensure t
+    :bind
+    ("s-h" . symon-mode))
+#+END_SRC
+* exwm
+#+BEGIN_SRC emacs-lisp
+  (use-package exwm
+    :ensure t
+    :config
+    (require 'exwm-config)
+    (exwm-config-default))
 #+END_SRC
 * Org
 ** Configuration

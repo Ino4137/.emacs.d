@@ -3,3 +3,6 @@ README.el
 /auto-save-list
 *.*~
 /smex-items
+dmenu-items
+recentf*
+transient/
