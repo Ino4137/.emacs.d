@@ -30,7 +30,8 @@
     (diminish 'subword-mode)
     (diminish 'rainbow-mode)
     (diminish 'auto-revert-mode)
-    (diminish 'company-mode))
+    (diminish 'company-mode)
+    (diminish 'eldoc-mode))
 #+END_SRC
 ** which-key
 #+BEGIN_SRC emacs-lisp
@@ -64,7 +65,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package sudo-edit
     :ensure t
-    :bind ("s-e" . sudo-edit))
+    :bind ("C-M-e" . sudo-edit))
 #+END_SRC
 ** rainbow-mode
 #+BEGIN_SRC emacs-lisp
@@ -100,28 +101,16 @@
     :ensure t
     :init
     (add-hook 'after-init-hook 'global-company-mode))
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  (setq company-selection-wrap-around t)
+  (company-tng-configure-default)
 #+END_SRC
-** dmenu
+* Language Modes
+** haskell-mode
 #+BEGIN_SRC emacs-lisp
-  (use-package dmenu
-    :ensure t
-    :bind
-    ("s-SPC" . 'dmenu))
-#+END_SRC
-** symon
-#+BEGIN_SRC emacs-lisp
-  (use-package symon
-    :ensure t
-    :bind
-    ("s-h" . symon-mode))
-#+END_SRC
-* exwm
-#+BEGIN_SRC emacs-lisp
-  (use-package exwm
-    :ensure t
-    :config
-    (require 'exwm-config)
-    (exwm-config-default))
+  (use-package haskell-mode
+    :ensure t)
 #+END_SRC
 * Org
 ** Configuration

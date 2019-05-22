@@ -20,7 +20,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (exwm symon dmenu diminish spaceline company magit dashboard rainbow-mode rainbow rainbow-delimiters sudo-edit avy switch-window smex ido-vertical-mode org-bullets spacemacs-theme which-key use-package))))
+    (json-mode nix-mode haskell-mode exwm symon dmenu diminish spaceline company magit dashboard rainbow-mode rainbow rainbow-delimiters sudo-edit avy switch-window smex ido-vertical-mode org-bullets spacemacs-theme which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
