@@ -106,10 +106,23 @@
   (setq company-selection-wrap-around t)
   (company-tng-configure-default)
 #+END_SRC
+** multiple-cursors
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :ensure t)
+  (global-set-key (kbd "C-,") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-c C-.") 'mc/mark-all-like-this)
+#+END_SRC
 * Language Modes
 ** haskell-mode
 #+BEGIN_SRC emacs-lisp
   (use-package haskell-mode
+    :ensure t)
+#+END_SRC
+** racket-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package racket-mode
     :ensure t)
 #+END_SRC
 * Org
@@ -118,6 +131,7 @@
   (setq org-src-window-setup 'current-window)
   (add-to-list 'org-structure-template-alist
 	       '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+  (add-hook 'org-mode-hook (lambda () (company-mode -1)))
 #+END_SRC
 ** Org Bullets
 #+BEGIN_SRC emacs-lisp
@@ -155,10 +169,10 @@
   (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 #+END_SRC
 * Terminal
-** Set fish as terminal
+** Set zsh as terminal
 #+BEGIN_SRC emacs-lisp
   (defadvice ansi-term (before force-bash)
-    (interactive (list "/bin/fish")))
+    (interactive (list "/bin/zsh")))
   (ad-activate 'ansi-term)
 #+END_SRC
 ** Set keybinding for ansi-term
@@ -219,7 +233,7 @@
 			      (?\[ . ?\])
 			      (?\{ . ?\})
 			      ))
-  (electric-pair-mode 1)
+;; for now disabled will see how it goes  (electric-pair-mode 1)
 #+END_SRC
 ** Enable line and column modes
 #+BEGIN_SRC emacs-lisp
@@ -296,4 +310,17 @@
     (interactive)
     (mapc 'kill-buffer (buffer-list)))
   (global-set-key (kbd "C-M-s-k") 'kill-all-buffers)
+#+END_SRC
+** eval-and-replace
+#+BEGIN_SRC emacs-lisp
+  (defun eval-and-replace ()
+    "Replace the preceding sexp with its value"
+    (interactive)
+    (backward-kill-sexp)
+    (condition-case nil
+	(prin1 (eval (read (current-kill 0)))
+	       (current-buffer))
+      (error (message "Invalid expression")
+	     (insert (current-kill 0)))))
+  (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 #+END_SRC
