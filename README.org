@@ -182,8 +182,9 @@
 * QOL Config
 ** No autosave, no backup file
 #+BEGIN_SRC emacs-lisp
-  (setq make-backup-file nil)
+  (setq make-backup-files nil)
   (setq auto-save-default nil)
+  (setq create-lockfiles nil)
 #+END_SRC
 ** Remove ugly UI elements
 #+BEGIN_SRC emacs-lisp
