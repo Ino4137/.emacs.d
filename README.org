@@ -6,6 +6,18 @@
     (package-refresh-contents)
     (package-install 'use-package))
 #+END_SRC
+** diminish
+#+BEGIN_SRC emacs-lisp
+  (use-package diminish
+    :ensure t
+    :init
+    (diminish 'which-key-mode)
+    (diminish 'subword-mode)
+    (diminish 'rainbow-mode)
+    (diminish 'auto-revert-mode)
+    (diminish 'company-mode)
+    (diminish 'eldoc-mode))
+#+END_SRC
 ** spacemacs-theme
 #+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'spacemacs-theme)
@@ -21,22 +33,11 @@
     (setq powerline-default-separator (quote arrow))
     (spaceline-spacemacs-theme))
 #+END_SRC
-** diminish
-#+BEGIN_SRC emacs-lisp
-  (use-package diminish
-    :ensure t
-    :init
-    (diminish 'which-key-mode)
-    (diminish 'subword-mode)
-    (diminish 'rainbow-mode)
-    (diminish 'auto-revert-mode)
-    (diminish 'company-mode)
-    (diminish 'eldoc-mode))
-#+END_SRC
 ** which-key
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure t
+    :diminish which-key-mode
     :init
     (which-key-mode))
 #+END_SRC
@@ -71,6 +72,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-mode
     :ensure t
+    :diminish rainbow-mode
     :init (rainbow-mode 1))
 #+END_SRC
 ** rainbow-delimiters
@@ -99,6 +101,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :ensure t
+    :diminish company-mode
     :init
     (add-hook 'after-init-hook 'global-company-mode))
   (setq company-idle-delay 0)
